@@ -1,11 +1,14 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('node:path');
+const fs = require('fs');
 
+// Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
 const createWindow = () => {
+  // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
@@ -14,29 +17,51 @@ const createWindow = () => {
     },
   });
 
-  //dev version
-  mainWindow.loadURL("http://localhost:3000");
+  mainWindow.webContents.setZoomFactor(1.25);
 
-  //production version
+  //Developement
+  mainWindow.loadURL("http://localhost:3000");
+  
+  //Production
   //mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
 };
 
+ipcMain.handle('open-key-file', async () => {
+  const result = await dialog.showOpenDialog({
+      title: 'Выберите файл с ключом',
+      filters: [{ name: 'Текстовые файлы', extensions: ['txt'] }],
+      properties: ['openFile']
+  });
+
+  if (!result.canceled) {
+      return fs.readFileSync(result.filePaths[0], 'utf8');
+  }
+
+  return null;
+});
+
+ipcMain.handle('get-file-name', async () => {
+  const result = await dialog.showOpenDialog({
+      title: 'Выберите файл с ключом',
+      filters: [{ name: 'Текстовые файлы', extensions: ['txt'] }],
+      properties: ['openFile']
+  });
+
+  if (!result.canceled) {
+      return result.filePaths[0];
+  }
+
+  return null;
+});
+
+ipcMain.handle('write-in-name', async (event, path,text) => {
+ 
+  fs.writeFileSync(path, text);
+
+  return null;
+});
+
 app.whenReady().then(() => {
   createWindow();
-
-
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
-    }
-  });
 });
-
-
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-});
-

@@ -1,0 +1,32 @@
+.text-area {
+    margin-bottom: 5px;
+}
+
+.text-area h1{
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 100%; 
+    text-align: center; 
+}
+
+.text-area textarea {
+    width: 97.5%;
+    height: 200px;
+    padding: 10px; /* Добавим отступы для текста */
+    border: 1px solid #64ffda; /* Бирюзовая граница */
+    border-radius: 5px;
+    background-color: #112240; /* Тёмно-синий фон */
+    color: #ccd6f6; /* Светло-серый цвет текста */
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    resize: none; /* Запрещаем изменение размера */
+    outline: none; /* Убираем стандартный outline */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Плавные переходы */
+}
+
+.text-area textarea:focus {
+    border-color: #64ffda; /* Бирюзовая граница при фокусе */
+    box-shadow: 0 0 10px rgba(100, 255, 218, 0.5); /* Бирюзовое свечение */
+}
