@@ -1,0 +1,69 @@
+.file-input {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрируем элементы по горизонтали */
+    gap: 10px;
+    width: 100%; /* Растягиваем на всю ширину */
+}
+
+.file-label {
+    color: #e0e0e0; /* Светло-серый цвет текста */
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 100%; /* Растягиваем на всю ширину */
+    text-align: center; /* Центрируем текст */
+}
+
+.file-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%; /* Растягиваем на всю ширину */
+    max-width: 800px; /* Ограничиваем максимальную ширину для удобства */
+}
+
+.file-button {
+    padding: 10px 20px;
+    border: 1px solid #0bacc2; /* Бирюзовый цвет границы */
+    border-radius: 5px;
+    background-color: #0bacc2; /* Бирюзовый цвет фона */
+    color: #ffffff; /* Белый цвет текста */
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    width: 100%; /* Растягиваем кнопку на всю ширину контейнера */
+}
+
+.file-button:hover {
+    background-color: #0896a8; /* Темнее при наведении */
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(11, 172, 194, 0.8); /* Свечение бирюзового цвета */
+}
+
+.file-button:active {
+    transform: scale(0.95);
+}
+
+.file-name {
+    color: #0bacc2; /* Бирюзовый цвет текста */
+    font-size: 14px;
+    font-weight: 500; /* Полужирный текст */
+    font-style: italic; /* Курсив */
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 5px 10px; /* Отступы для текста */
+    border: 1px dashed #0bacc2; /* Пунктирная граница бирюзового цвета */
+    border-radius: 5px; /* Скругление углов */
+    background-color: rgba(11, 172, 194, 0.1); /* Полупрозрачный бирюзовый фон */
+    width: 100%; /* Растягиваем на всю ширину */
+    text-align: center; /* Центрируем текст */
+}

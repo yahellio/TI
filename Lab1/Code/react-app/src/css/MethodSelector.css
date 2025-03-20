@@ -1,0 +1,35 @@
+.method-selector {
+    display: flex;
+    gap: 10px; /* Расстояние между кнопками */
+    width: 100%; /* Растягиваем на всю ширину */
+}
+
+.method-option {
+    flex: 1; /* Каждая кнопка занимает равное пространство */
+    padding: 10px 20px;
+    border: 1px solid #64ffda; /* Бирюзовая граница */
+    border-radius: 5px;
+    background-color: #112240; /* Тёмно-синий фон */
+    color: #64ffda; /* Бирюзовый текст */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    text-align: center; /* Центрируем текст */
+    font-size: 14px;
+    font-weight: 700; /* Более толстый шрифт */
+    text-transform: uppercase; /* Заглавные буквы */
+    letter-spacing: 4px;
+    white-space: normal; /* Разрешаем перенос текста на новую строку */
+    line-height: 1.2; /* Увеличиваем межстрочный интервал */
+}
+
+.method-option:hover {
+    background-color: #233554; /* Темнее при наведении */
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(100, 255, 218, 0.5); /* Бирюзовое свечение */
+}
+
+.method-option.active {
+    background-color: #64ffda; /* Бирюзовый фон для активной кнопки */
+    color: #0a192f; /* Тёмно-синий текст для активной кнопки */
+    box-shadow: 0 0 15px rgba(100, 255, 218, 0.7); /* Свечение для активной кнопки */
+}

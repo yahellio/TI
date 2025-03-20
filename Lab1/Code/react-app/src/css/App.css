@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #0a192f;
+    color: #ccd6f6;
+}
+
+.app {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.file-buttons {
+    
+    display: flex;
+    gap: 10px;
+}
+
+.control-panel {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.method-section {
+    flex: 1;
+}
+
+.key-section {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+

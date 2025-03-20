@@ -1,0 +1,37 @@
+.key-input {
+    margin-bottom: 5px;
+    width: 100%; /* Растягиваем на всю ширину */
+    display: flex;
+    align-items: center; /* Выравниваем элементы по вертикали */
+    gap: 10px; /* Расстояние между лейблом и полем ввода */
+}
+
+.key-label {
+    color: #64ffda; /* Бирюзовый цвет текста */
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap; /* Текст не переносится на новую строку */
+}
+
+.key-field {
+    padding: 10px;
+    border: 1px solid #64ffda; /* Бирюзовая граница */
+    border-radius: 5px;
+    background-color: #112240; /* Тёмно-синий фон */
+    color: #64ffda; /* Бирюзовый цвет текста */
+    font-size: 14px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    width: 100%; /* Растягиваем на всю ширину */
+}
+
+.key-field:focus {
+    border-color: #64ffda; /* Яркая бирюзовая граница при фокусе */
+    outline: none;
+    box-shadow: 0 0 10px rgba(100, 255, 218, 0.5); /* Свечение при фокусе */
+}
+
+.key-field::placeholder {
+    color: #657184; /* Серый цвет плейсхолдера */
+}
