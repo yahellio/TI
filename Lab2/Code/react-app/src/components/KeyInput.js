@@ -1,14 +1,17 @@
-import React, {useContext} from 'react';
+import React, { useContext, useState } from 'react';
 import '../css/KeyInput.css';
 import { TextContext } from './TextContext';
+const max = 28;
 
 const KeyInput = () => {
+    const { setKey } = useContext(TextContext);
+    const [inputValue, setInputValue] = useState(''); 
 
-    const {setKey} = useContext(TextContext);
     const handleChange = (event) => {
-        //Добавить обработку ключа(удалять лишние символы кроме 0 и 1)
-        setKey(event.target.value);
-    }
+        const filteredValue = event.target.value.replace(/[^01]/g, '');
+        setInputValue(filteredValue); 
+        setKey(filteredValue); 
+    };
 
     return (
         <div className="key-input">
@@ -17,6 +20,7 @@ const KeyInput = () => {
                 type="text"
                 placeholder="Enter key"
                 className="key-field"
+                value={inputValue}
                 onChange={handleChange}
             />
         </div>

@@ -1,27 +1,35 @@
 import React, { useContext } from 'react';
 import '../css/Buttons.css';
 import { TextContext } from './TextContext';
-import {Encrypt, Decrypt} from "../Cypher.js"
+import {Ncrypt} from "../Cypher.js"
 
 const Buttons = () => {
 
-    const{text, key, outRoad, setC} = useContext(TextContext);
+    const{text, key, outRoad, setC, setgenKey} = useContext(TextContext);
     
     const mouseClickE = async () => {
-
-        const encryptedText = Encrypt(text, key);
-        console.log(encryptedText)
-        setC(encryptedText); 
-        if(outRoad) await window.electronAPI.writeInFile(outRoad, encryptedText);
+        if(key.length != 28){
+            alert("Key length is not 28!")
+            return;
+        }
+        const ncryptedText = Ncrypt(text, key);
+        console.log(ncryptedText[0])
+        setC(ncryptedText[0]); 
+        setgenKey(ncryptedText[1]);
+        if(outRoad) await window.electronAPI.writeInFile(outRoad, ncryptedText[0]);
     }
     const mouseClickD = async () => {
     
-        const decryptedText = Decrypt(text, key);
-        console.log(decryptedText)
-        setC(decryptedText); 
-        if(outRoad) await window.electronAPI.writeInFile(outRoad, decryptedText);
-    
-}
+        if(key.length != 28){
+            alert("Key length is not 28!")
+            return;
+        }
+        const ncryptedText = Ncrypt(text, key);
+        console.log(ncryptedText[0])
+        setC(ncryptedText[0]); 
+        setgenKey(ncryptedText[1]);
+        if(outRoad) await window.electronAPI.writeInFile(outRoad, ncryptedText[0]);
+    }   
 
     return (
         <div className="buttons">
