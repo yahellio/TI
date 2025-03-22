@@ -22,7 +22,7 @@ const App = () => {
                 <div className="file-buttons">
                     <FileInput id = "in" label="Input File" />
                     <div></div>
-                    <FileInput id = "out" label="Output File" />
+                    <FileInput id = "out" label="Output Folder" />
                 </div>
             </div>
             <Polynom />

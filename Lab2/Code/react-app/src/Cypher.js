@@ -1,7 +1,7 @@
 //x^28 + x^3 + 1
  
-const x28 = 27;
-const x3 = 2;
+const x28 = 0;
+const x3 = 27 - 2;
  
 function createArr(key){
     const charArray = key.split('');
@@ -17,7 +17,7 @@ export function Ncrypt(val, key){
     for(let i = 0; i < val.length; i++){
         let xorResult = reg[x3] ^ reg[x28];
         let binaryXOR = xorResult.toString(2);
-        res.unshift(binaryXOR);
+        res.push(reg[x28]);
 
         reg.push(binaryXOR);
         reg.shift();
@@ -29,5 +29,5 @@ export function Ncrypt(val, key){
 
     const resultBinary = xorWithVal.map(bit => bit.toString(2)).join('');
 
-    return [resultBinary,res];
+    return [resultBinary,res.join("")];
 }   

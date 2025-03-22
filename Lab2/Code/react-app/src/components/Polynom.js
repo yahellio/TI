@@ -5,7 +5,7 @@ const Polynom = () => {
   return (
     <div className="polynomial-display">
       <h1>
-      Polynomial: x<sup>26</sup> + x<sup>8</sup> + x<sup>7</sup> + x + 1</h1>
+      Polynomial: x<sup>28</sup> + x<sup>3</sup> + 1</h1>
     </div>
   );
 };
