@@ -24,6 +24,7 @@ const FileInput = ({ label,id }) => {
     const mouseClick = async (id) => {
         if(id === "in"){
             let t = await window.electronAPI.openKeyFile();
+            if(t.length === 0) return;
             setText(t[0]);
             setFileContent(t[0]);
             setOutRoad(t[1]);
