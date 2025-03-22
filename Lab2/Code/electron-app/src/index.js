@@ -38,14 +38,15 @@ ipcMain.handle('open-key-file', async () => {
     const bitArray = [];
     for (const byte of binaryData) {
         for (let i = 7; i >= 0; i--) {
-            bitArray.push((byte >> i) & 1); // Преобразование каждого байта в биты
+            bitArray.push((byte >> i) & 1); 
         }
     }
+  
     const parsedPath = path.parse(result.filePaths[0]);
     return [bitArray.join(""),`${parsedPath.name}${parsedPath.ext}`]; 
   }
 
-  return null;
+  return [];
 });
 
 ipcMain.handle('get-file-name', async () => {

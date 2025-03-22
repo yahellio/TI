@@ -49,3 +49,59 @@
     color: #112240; /* Тёмно-синий текст при наведении */
     box-shadow: 0 0 10px rgba(255, 107, 107, 0.5); /* Красное свечение */
 }
+
+
+
+.custom-alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 25, 47, 0.9); /* Полупрозрачный тёмно-синий фон */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Убедимся, что окно поверх всех элементов */
+  }
+  
+  .custom-alert {
+    background-color: #112240; /* Тёмно-синий фон */
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #64ffda; /* Бирюзовая граница */
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.3); /* Бирюзовое свечение */
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+  }
+  
+  .custom-alert p {
+    color: #ccd6f6; /* Светло-серый цвет текста */
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .custom-alert button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #64ffda; /* Бирюзовый фон */
+    color: #0a192f; /* Тёмно-синий текст */
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .custom-alert button:hover {
+    background-color: #52e3c2; /* Более светлый бирюзовый при наведении */
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(100, 255, 218, 0.5); /* Свечение при наведении */
+  }
+  
+  .custom-alert button:active {
+    transform: scale(0.95);
+  }
