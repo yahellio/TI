@@ -1,0 +1,14 @@
+directories:
+  output: release
+  buildResources: build
+appId: com.example.myapp
+productName: MyApp
+files:
+  - filter:
+      - src/**/*
+      - node_modules/**/*
+      - package.json
+      - src/ffmpeg.dll
+win:
+  target: nsis
+electronVersion: 34.2.0
