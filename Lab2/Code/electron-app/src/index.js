@@ -30,12 +30,18 @@ const createWindow = () => {
 ipcMain.handle('open-key-file', async () => {
   const result = await dialog.showOpenDialog({
       title: 'Выберите файл с ключом',
-      filters: [{ name: 'Текстовые файлы', extensions: ['txt'] }],
-      properties: ['openFile']
+      properties: ['openFile'] 
   });
 
   if (!result.canceled) {
-      return fs.readFileSync(result.filePaths[0], 'utf8');
+      const binaryData = fs.readFileSync(result.filePaths[0]);
+      const bitArray = [];
+  for (const byte of binaryData) {
+      for (let i = 7; i >= 0; i--) {
+          bitArray.push((byte >> i) & 1); // Преобразование каждого байта в биты
+      }
+  }
+      return binaryData; 
   }
 
   return null;
