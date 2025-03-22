@@ -5,7 +5,7 @@ import '../css/TextArea.css';
 const TextArea = () => {
     const { text, setText } = useContext(TextContext);
     const handleChange = (event) => {
-        setText(event.target.value);
+        setText(event.target.value.replace(/[^01]/g, ''));
     }
     return (
         <div className="text-area">

@@ -92,3 +92,5 @@ typings/
 out/
 
 package-lock.json
+
+/release/

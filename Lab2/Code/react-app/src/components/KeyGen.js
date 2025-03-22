@@ -10,10 +10,9 @@ const KeyInput = () => {
             <label className="key-label">Generated Key</label>
             <input
                 type="text"
-                placeholder="Enter key"
+                placeholder=""
                 className="key-field"
                 value={genKey}
-                
             />
         </div>
     );

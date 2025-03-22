@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import '../css/KeyInput.css';
 import { TextContext } from './TextContext';
-const max = 28;
 
 const KeyInput = () => {
     const { setKey } = useContext(TextContext);
