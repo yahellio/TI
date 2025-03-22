@@ -25,6 +25,7 @@ const createWindow = () => {
   //Production
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
+
 };
 
 ipcMain.handle('open-key-file', async () => {
