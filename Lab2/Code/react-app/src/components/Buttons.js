@@ -22,19 +22,26 @@ const Buttons = () => {
     const showAlert = (message) => {
         setAlertMessage(message);
       };
-      const closeAlert = () => {
-        setAlertMessage(null);
-      };
+
+    const closeAlert = () => {
+      setAlertMessage(null);
+    };
+
     const mouseClickE = async () => {
+        let cleanedText = text.replace(/[^01]/g, ''); 
+
         if(key.length !== 28){
             showAlert("Key length is not 28!");
             return;
         }
-        if(text.length % 8 !== 0 || text.length === 0){
+        if(cleanedText.length % 8 !== 0 || cleanedText.length === 0){
             showAlert("The length of the original text is not a multiple of 8 bits. The text is padded with 0 at the end.");
-            setText(text.padEnd(text.length + (8 - (text.length % 8)), '0'));
+            cleanedText = cleanedText.padEnd(cleanedText.length + (8 - (cleanedText.length % 8)), '0');
         }
-        const ncryptedText = Ncrypt(text, key);
+
+        setText(cleanedText);
+
+        const ncryptedText = Ncrypt(cleanedText, key);
         console.log(ncryptedText[0])
         setC(ncryptedText[0]); 
         setgenKey(ncryptedText[1]);
@@ -48,6 +55,7 @@ const Buttons = () => {
         if(outDir && outRoad) await window.electronAPI.writeInFile(outDir + "/" + newFileName , ncryptedText[0]);
     }
     const mouseClickD = async () => {
+        setText(text.replace(/[^01]/g, ''));
     
         if(key.length !== 28 ){
             alert("Key length is not 28!")

@@ -1,11 +1,11 @@
-import React,{ useContext } from 'react';
+import React,{ useContext} from 'react';
 import { TextContext } from './TextContext';
 import '../css/TextArea.css';
 
 const TextArea = () => {
     const { text, setText } = useContext(TextContext);
     const handleChange = (event) => {
-        setText(event.target.value.replace(/[^01]/g, ''));
+        setText(event.target.value);
     }
     return (
         <div className="text-area">

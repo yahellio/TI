@@ -35,3 +35,18 @@
 .key-field::placeholder {
     color: #657184; /* Серый цвет плейсхолдера */
 }
+
+.key-counter {
+    display: flex;
+    gap: 10px;
+    color: #64ffda;
+    font-size: 14px;
+    min-width: 75px; /* Фиксированная ширина для счётчика */
+}
+
+.key-counter span {
+    background-color: #112240;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #64ffda;
+}
