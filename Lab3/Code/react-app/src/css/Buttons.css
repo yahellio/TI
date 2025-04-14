@@ -1,0 +1,107 @@
+.buttons {
+    display: flex;
+    gap: 10px; /* Расстояние между кнопками */
+    width: 100%; /* Растягиваем на всю ширину */
+}
+
+.buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    flex: 1; /* Растягиваем кнопки на всю доступную ширину */
+    text-align: center; /* Центрируем текст */
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase; /* Заглавные буквы */
+    letter-spacing: 1px;
+}
+
+.buttons button:hover {
+    transform: scale(1.05);
+}
+
+.buttons button:active {
+    transform: scale(0.95);
+}
+
+.buttons .encrypt {
+    background-color: #112240; /* Тёмно-синий фон */
+    border: 1px solid #64ffda; /* Бирюзовая граница */
+    color: #64ffda; /* Бирюзовый текст */
+}
+
+.buttons .encrypt:hover {
+    background: linear-gradient(135deg, #0bacc2, #64ffda); /* Градиентный фон при наведении */
+    color: #0a192f; /* Тёмно-синий текст при наведении */
+    box-shadow: 0 0 10px rgba(100, 255, 218, 0.5); /* Бирюзовое свечение */
+}
+
+.buttons .decrypt {
+    background-color: #112240; /* Тёмно-синий фон */
+    border: 1px solid #ff6b6b; /* Красная граница */
+    color: #ff6b6b; /* Красный текст */
+}
+
+.buttons .decrypt:hover {
+    background: linear-gradient(135deg, #ff6b6b, #ff3b3b); /* Градиентный фон при наведении */
+    color: #112240; /* Тёмно-синий текст при наведении */
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.5); /* Красное свечение */
+}
+
+
+
+.custom-alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 25, 47, 0.9); /* Полупрозрачный тёмно-синий фон */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Убедимся, что окно поверх всех элементов */
+  }
+  
+  .custom-alert {
+    background-color: #112240; /* Тёмно-синий фон */
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #64ffda; /* Бирюзовая граница */
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.3); /* Бирюзовое свечение */
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+  }
+  
+  .custom-alert p {
+    color: #ccd6f6; /* Светло-серый цвет текста */
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .custom-alert button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #64ffda; /* Бирюзовый фон */
+    color: #0a192f; /* Тёмно-синий текст */
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .custom-alert button:hover {
+    background-color: #52e3c2; /* Более светлый бирюзовый при наведении */
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(100, 255, 218, 0.5); /* Свечение при наведении */
+  }
+  
+  .custom-alert button:active {
+    transform: scale(0.95);
+  }
