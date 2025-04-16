@@ -20,10 +20,10 @@ const createWindow = () => {
   mainWindow.webContents.setZoomFactor(1.25);
 
   //Developement
-  //mainWindow.loadURL("http://localhost:3000");
+  mainWindow.loadURL("http://localhost:3000");
   
   //Production
-  mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  //mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
 
 };
@@ -36,15 +36,9 @@ ipcMain.handle('open-key-file', async () => {
 
   if (!result.canceled) {
     const binaryData = fs.readFileSync(result.filePaths[0]);
-    const bitArray = [];
-    for (const byte of binaryData) {
-        for (let i = 7; i >= 0; i--) {
-            bitArray.push((byte >> i) & 1); 
-        }
-    }
-  
+    const byteArray = Array.from(binaryData); 
     const parsedPath = path.parse(result.filePaths[0]);
-    return [bitArray.join(""),`${parsedPath.name}${parsedPath.ext}`]; 
+    return [byteArray,`${parsedPath.name}${parsedPath.ext}`]; 
   }
 
   return [];
@@ -65,14 +59,7 @@ ipcMain.handle('get-file-name', async () => {
 
 ipcMain.handle('write-in-name', async (event, path,text) => {
  
-  const byteArr = [];
-  for(let i = 0; i<text.length; i += 8){
-    const byteStr = text.slice(i, i+8);
-    const byte = parseInt(byteStr,2);
-    byteArr.push(byte);
-  }
-
-  fs.writeFileSync(path, Buffer.from(byteArr));
+  fs.writeFileSync(path, Buffer.from(text));
 
   return null;
 });

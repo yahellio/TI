@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import '../css/Buttons.css';
 import { TextContext } from './TextContext';
-import {Ncrypt} from "../Cypher.js";
+import {Encrypt, Decrypt} from "../Cypher.js";
 import {isPrime} from "../isPrime.js"
 
 const CustomAlert = ({ message, onClose }) => {
@@ -29,7 +29,6 @@ const Buttons = () => {
     };
 
     const mouseClickE = async () => {
-        let cleanedText = text.replace(/[^0-9]/g, ''); 
 
         if(!isPrime(primeP)){
             showAlert("P is not prime number!");
@@ -51,19 +50,19 @@ const Buttons = () => {
           return;
         }
 
+        setMultN(primeP*primeQ);
+
         if(!numberB || numberB >= multN  ){
           showAlert("P should be lower than N");
           return;
         }
 
-        setMultN(primeP*primeQ);
+      
 
-        setText(cleanedText);
+        const encryptedText = Encrypt(text, numberB, multN);
 
-        /*const ncryptedText = Ncrypt(cleanedText, key);
-        console.log(ncryptedText[0])
-        setC(ncryptedText[0]); 
-        setgenKey(ncryptedText[1]);
+
+        setC(encryptedText); 
 
         const lastDotIndex = outRoad.lastIndexOf('.');
         const fileName = outRoad.slice(0, lastDotIndex); 
@@ -71,10 +70,10 @@ const Buttons = () => {
       
         const newFileName = `${fileName}_encrypt${fileExt}`;
 
-        if(outDir && outRoad) await window.electronAPI.writeInFile(outDir + "/" + newFileName , ncryptedText[0]);*/
+        if(outDir && outRoad) await window.electronAPI.writeInFile(outDir + "/" + newFileName , encryptedText);
     }
+    
     const mouseClickD = async () => {
-      setText(text.replace(/[^0-9]/g, ''));
   
       if(!isPrime(primeP)){
         showAlert("P is not prime number!");
@@ -102,20 +101,19 @@ const Buttons = () => {
       }
 
       setMultN(primeP*primeQ);
-      /*
-        const ncryptedText = Ncrypt(text, key);
-        console.log(ncryptedText[0])
-        setC(ncryptedText[0]); 
-        setgenKey(ncryptedText[1]);
+     
+      const decryptedText = Decrypt(text, numberB, multN, primeQ, primeP);
 
-        const lastDotIndex = outRoad.lastIndexOf('.');
-        const fileName = outRoad.slice(0, lastDotIndex); 
-        const fileExt = outRoad.slice(lastDotIndex); 
+      setC(decryptedText); 
+
+      const lastDotIndex = outRoad.lastIndexOf('.');
+      const fileName = outRoad.slice(0, lastDotIndex); 
+      const fileExt = outRoad.slice(lastDotIndex); 
+    
+      const newFileName = `${fileName}_decrypt${fileExt}`;
+
+      if(outDir && outRoad) await window.electronAPI.writeInFile(outDir + "/" + newFileName, decryptedText);
       
-        const newFileName = `${fileName}_decrypt${fileExt}`;
-
-        if(outDir && outRoad) await window.electronAPI.writeInFile(outDir + "/" + newFileName, ncryptedText[0]);
-      */
     }   
 
     return (

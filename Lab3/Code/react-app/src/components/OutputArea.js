@@ -10,7 +10,7 @@ const TextArea = () => {
     return (
         <div className="text-area">
             <h1>Output Text</h1>
-            <textarea  readOnly value={c} onChange={handleChange}/>
+            <textarea  readOnly value={c.join("")} onChange={handleChange}/>
         </div>
     );
 };

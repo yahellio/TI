@@ -3,14 +3,12 @@ import { TextContext } from './TextContext';
 import '../css/TextArea.css';
 
 const TextArea = () => {
-    const { text, setText } = useContext(TextContext);
-    const handleChange = (event) => {
-        setText(event.target.value);
-    }
+    const { text} = useContext(TextContext);
+
     return (
         <div className="text-area">
             <h1>Input Text</h1>
-            <textarea  value={text} onChange={handleChange}/>
+            <textarea  value={text.join("")} readOnly/>
         </div>
     );
 };

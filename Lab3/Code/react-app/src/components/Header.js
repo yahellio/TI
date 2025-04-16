@@ -4,7 +4,7 @@ import '../css/Header.css';
 const Header = () => {
     return (
         <header className="header">
-            <h1>STREAM ENCRYPTION</h1>
+            <h1>Rabin cryptosystem</h1>
         </header>
     );
 };
