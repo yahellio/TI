@@ -5,56 +5,51 @@ export function Encrypt(bytes, b, n){
     })   
 }   
 
-export function Decrypt(bytes, b, n, q, p){
-    // mi^2 + bmi - ci = 0 (mod n)
-    // m = (-b + корень(D)) / 2 
-    // D = b^2 + 4c (mod n)
+function modInv(a, mod) {
+    const [gcd, x] = gcd_ext(a, mod);
+    if (gcd !== 1) throw new Error("No inverse exists");
+    return (x % mod + mod) % mod;
+}
 
+export function Decrypt(bytes, b, n, q, p) {
+    const inv2 = modInv(2, n);
     return bytes.map(byte => {
-
-        let d = (b^2 + 4*byte) % n;
+        const d = (b * b + 4 * byte) % n;
+        const s = modPow(d, (p + 1) / 4, p);
+        const r = modPow(d, (q + 1) / 4, q);
+        const [Yp, Yq] = gcd_ext(p, q);
         
-        let s = Math.pow(d, ((p+1)/4)) % p;
-        let r = Math.pow(d, ((q+1)/4)) % q;
-        
-        //алгоритм Евклида расширенный Yp * p + Yq * q = 1 
-        // a = p     
-        // b = q     
-        // Yp = X1 = 
-        // Yq = Y1 =  
-        let res = gcd_ext(p, q);
-        let Yp = res[1];
-        let Yq = res[2];
+        const d1 = (Yp * p * r + Yq * q * s) % n;
+        const d2 = (n - d1) % n;
+        const d3 = (Yp * p * r - Yq * q * s) % n;
+        const d4 = (n - d3) % n;
 
-        let d1 = (Yp * p * r + Yq * q *s) % n;
-        let d2 = -(Yp * p * r + Yq * q *s) % n;
-        let d3 = (Yp * p * r - Yq * q *s) % n;
-        let d4 = -(Yp * p * r - Yq * q *s) % n;
+        const m1 = ((-b + d1 + n) * inv2) % n;
+        const m2 = ((-b + d2 + n) * inv2) % n;
+        const m3 = ((-b + d3 + n) * inv2) % n;
+        const m4 = ((-b + d4 + n) * inv2) % n;
 
-        let m1 = ((-b + d1) / 2) % n;
-        let m2 = ((-b + d2) / 2) % n; 
-        let m3 = ((-b + d3) / 2) % n;   
-        let m4 = ((-b + d4) / 2) % n;
-
-        if (m1 <= 256) return m1; 
-        if (m2 <= 256) return m2; 
-        if (m3 <= 256) return m3; 
-        if (m4 <= 256) return m4; 
-    })
-
+        const validMs = [m1, m2, m3, m4].filter(m => 
+            Number.isInteger(m) && m >= 0 && m <= 255
+        );
+        if (validMs.length === 0) return null; // или бросить ошибку
+        return validMs[0];
+    });
 }
 
-function gcd_ext(a, b){
-    if(b === 0){
-        return [a, 1, 0];
+function modPow(base, exp, mod) {
+    let result = 1;
+    base = base % mod;
+    while (exp > 0) {
+        if (exp % 2 === 1) result = (result * base) % mod;
+        base = (base * base) % mod;
+        exp = Math.floor(exp / 2);
     }
-
-    let res = gcd_ext(b, a%b);
-    res[1] -= (a/b) * res[2];
-    let temp = res[1];
-    res[1] = res[2];
-    res[2] = temp;
-
-    return res;
+    return result;
 }
 
+function gcd_ext(a, b) {
+    if (b === 0) return [a, 1, 0];
+    const [gcd, x1, y1] = gcd_ext(b, a % b);
+    return [gcd, y1, x1 - Math.floor(a / b) * y1];
+}

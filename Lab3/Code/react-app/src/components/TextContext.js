@@ -4,6 +4,7 @@ export const TextContext = createContext();
 
 export const TextProvider = ({ children }) => {
     const [text, setText] = useState([""]);
+    const [text4, setText4] = useState([""]);
     const [c, setC] = useState([""]);
     const [primeP, setPrimeP] = useState("");
     const [primeQ, setPrimeQ] = useState("");
@@ -14,7 +15,7 @@ export const TextProvider = ({ children }) => {
     
 
     return (
-        <TextContext.Provider value={{ text, setText, primeP, setPrimeP, primeQ, setPrimeQ, multN, setMultN, numberB, setNumberB, outRoad, setOutRoad, c, setC, outDir, setOutDir }}>
+        <TextContext.Provider value={{ text, setText, text4, setText4, primeP, setPrimeP, primeQ, setPrimeQ, multN, setMultN, numberB, setNumberB, outRoad, setOutRoad, c, setC, outDir, setOutDir }}>
             {children}
         </TextContext.Provider>
     );

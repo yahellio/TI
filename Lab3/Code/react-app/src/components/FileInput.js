@@ -6,7 +6,7 @@ const FileInput = ({ label,id }) => {
     const [isFile, SetIsFile] = useState("❌❌❌❌❌"); 
     const [fileContent, setFileContent] = useState("");
     const [fileText, setFileText] = useState("");
-    const {text, setText, setOutRoad, setOutDir} = useContext(TextContext);
+    const {text, setText, setText4, setOutRoad, setOutDir} = useContext(TextContext);
 
     useEffect(() => {
         if (id === "in" && text !== fileContent) {
@@ -26,8 +26,9 @@ const FileInput = ({ label,id }) => {
             let t = await window.electronAPI.openKeyFile();
             if(t.length === 0) return;
             setText(t[0]);
-            setFileContent(t[0]);
-            setOutRoad(t[1]);
+            setText4(t[1]);
+            setFileContent(t[0]);//вроде бесполезная строка но нет времени дебажить без неё
+            setOutRoad(t[2]);
             SetIsFile("✅✅✅✅✅");
             
         }else{     

@@ -1,107 +1,174 @@
-.buttons {
-    display: flex;
-    gap: 10px; /* Расстояние между кнопками */
-    width: 100%; /* Растягиваем на всю ширину */
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 5px;
 }
 
-.buttons button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    flex: 1; /* Растягиваем кнопки на всю доступную ширину */
-    text-align: center; /* Центрируем текст */
-    font-size: 14px;
-    font-weight: 500;
-    text-transform: uppercase; /* Заглавные буквы */
-    letter-spacing: 1px;
+.action-selector {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
 }
 
-.buttons button:hover {
-    transform: scale(1.05);
+.radio-label {
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  background-color: #112240;
+  border: 1px solid #2d3a5a;
+  color: #ccd6f6;
+  flex: 1;
+  justify-content: center;
 }
 
-.buttons button:active {
-    transform: scale(0.95);
+.radio-label input {
+  margin-right: 8px;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ccd6f6;
+  border-radius: 50%;
+  transition: all 0.2s;
+  outline: none;
+  position: relative;
+  background-color: #ccd6f6;
 }
 
-.buttons .encrypt {
-    background-color: #112240; /* Тёмно-синий фон */
-    border: 1px solid #64ffda; /* Бирюзовая граница */
-    color: #64ffda; /* Бирюзовый текст */
+/* Бирюзовый кружок для Encrypt */
+.radio-label:first-of-type input:checked {
+  background-color: #0bacc2;
+  border-color: #0bacc2;
 }
 
-.buttons .encrypt:hover {
-    background: linear-gradient(135deg, #0bacc2, #64ffda); /* Градиентный фон при наведении */
-    color: #0a192f; /* Тёмно-синий текст при наведении */
-    box-shadow: 0 0 10px rgba(100, 255, 218, 0.5); /* Бирюзовое свечение */
+/* Красный кружок для Decrypt */
+.radio-label:last-of-type input:checked {
+  background-color: #ff6b6b;
+  border-color: #ff6b6b;
 }
 
-.buttons .decrypt {
-    background-color: #112240; /* Тёмно-синий фон */
-    border: 1px solid #ff6b6b; /* Красная граница */
-    color: #ff6b6b; /* Красный текст */
+.radio-label.active {
+  border-color: #64ffda;
+  color: #64ffda;
 }
 
-.buttons .decrypt:hover {
-    background: linear-gradient(135deg, #ff6b6b, #ff3b3b); /* Градиентный фон при наведении */
-    color: #112240; /* Тёмно-синий текст при наведении */
-    box-shadow: 0 0 10px rgba(255, 107, 107, 0.5); /* Красное свечение */
+.radio-label:hover {
+  transform: scale(1.05);
 }
 
+.radio-label:first-of-type.active {
+  border-color: #0bacc2;;
+  color: #0bacc2;;
+}
 
+.radio-label:last-of-type.active {
+  border-color: #ff6b6b;
+  color: #ff6b6b;
+}
+
+.execute-button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, #0bacc2 0%, #ff6b6b 100%);
+  color: #112240;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  /* Тонкая граница, которая сочетается с градиентом */
+  box-shadow: inset 0 0 0 1px rgba(17, 34, 64, 0.5);
+}
+
+.execute-button:hover {
+  color: #ccd6f6;
+  /* Свечение с обоими цветами градиента */
+  box-shadow: 0 0 10px rgba(11, 172, 194, 0.6), 
+              0 0 10px rgba(255, 107, 107, 0.6),
+              inset 0 0 0 1px rgba(100, 255, 218, 0.3);
+  transform: scale(1.02);
+}
+
+.execute-button:active {
+  transform: scale(0.98);
+  background: linear-gradient(135deg, #0896a8 0%, #e05a5a 100%);
+  box-shadow: inset 0 0 0 1px rgba(100, 255, 218, 0.5);
+}
+
+/* Для текста внутри кнопки (если нужно) */
+.execute-button span {
+  position: relative;
+  z-index: 2;
+  transition: color 0.3s ease;
+}
 
 .custom-alert-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(10, 25, 47, 0.9); /* Полупрозрачный тёмно-синий фон */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000; /* Убедимся, что окно поверх всех элементов */
-  }
-  
-  .custom-alert {
-    background-color: #112240; /* Тёмно-синий фон */
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #64ffda; /* Бирюзовая граница */
-    box-shadow: 0 0 20px rgba(100, 255, 218, 0.3); /* Бирюзовое свечение */
-    max-width: 400px;
-    width: 90%;
-    text-align: center;
-  }
-  
-  .custom-alert p {
-    color: #ccd6f6; /* Светло-серый цвет текста */
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
-  
-  .custom-alert button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #64ffda; /* Бирюзовый фон */
-    color: #0a192f; /* Тёмно-синий текст */
-    font-size: 14px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-  }
-  
-  .custom-alert button:hover {
-    background-color: #52e3c2; /* Более светлый бирюзовый при наведении */
-    transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(100, 255, 218, 0.5); /* Свечение при наведении */
-  }
-  
-  .custom-alert button:active {
-    transform: scale(0.95);
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 25, 47, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.custom-alert {
+  background-color: #112240;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #64ffda;
+  box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+.custom-alert p {
+  color: #ccd6f6;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.custom-alert button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #64ffda;
+  color: #0a192f;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.custom-alert button:hover {
+  background-color: #52e3c2;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
+}
+
+.custom-alert button:active {
+  transform: scale(0.95);
+}
