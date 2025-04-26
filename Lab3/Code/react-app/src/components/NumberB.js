@@ -3,8 +3,8 @@ import '../css/NumberB.css';
 import { TextContext } from './TextContext';
 
 const KeyInput = () => {
-    const { setNumberB } = useContext(TextContext);
-    const [inputValue, setInputValue] = useState(''); 
+    const { setNumberB, numberB } = useContext(TextContext);
+    const [inputValue, setInputValue] = useState(numberB); 
 
     const handleChange = (event) => {
         const filteredValue = event.target.value.replace(/[^0-9]/g, '');
@@ -12,6 +12,7 @@ const KeyInput = () => {
         setNumberB(filteredValue); 
     };
 
+    
     return (
         <div className="key-input">
             <label className="key-label">B</label>

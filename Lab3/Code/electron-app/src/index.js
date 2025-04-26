@@ -49,7 +49,7 @@ ipcMain.handle('open-key-file', async (event, byte) => {
         const uint32Array = [];
       
         if (buffer.length % 4 !== 0) {
-          throw new Error('File size must be a multiple of 4 bytes for 32-bit values');
+          throw new Error('File size must be a multiple of 4 bytes for 32-bit values. Plese, set the encrypt-mode.');
         }
 
         // Разбираем буфер на 32-битные числа (Little-Endian)

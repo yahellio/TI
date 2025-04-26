@@ -23,8 +23,10 @@ export function Decrypt(bytes, b, n, q, p) {
         const mp = modPow(D, (bigP + 1n) / 4n, bigP);
         const mq = modPow(D, (bigQ + 1n) / 4n, bigQ);
 
+        //расширенный алгоритм Евлкида
         const [gcd, yp, yq] = gcd_ext(bigP, bigQ);
 
+        //китайская теорема об остатках
         let d = [];
         d[0] = (yp * bigP * mq + yq * bigQ * mp) % bigN;
         if (d[0] < 0n) d[0] += bigN;
@@ -32,7 +34,7 @@ export function Decrypt(bytes, b, n, q, p) {
         d[2] = (yp * bigP * mq - yq * bigQ * mp) % bigN;
         if (d[2] < 0n) d[2] += bigN;
         d[3] = (bigN - d[2]) % bigN;
-
+ 
         for (let i = 0; i < 4; i++) {
             let m = (d[i] - bigB);
             if (m % 2n !== 0n) {
@@ -42,11 +44,11 @@ export function Decrypt(bytes, b, n, q, p) {
             if (m < 0n) m += bigN;
 
             if (m >= 0n && m <= 255n) {
-                return Number(m); // вернуть обычный number
+                return Number(m); 
             }
         }
 
-        return null; // если ничего не найдено
+        return null; 
     });
 }
 

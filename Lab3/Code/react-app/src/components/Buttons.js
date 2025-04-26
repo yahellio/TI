@@ -28,6 +28,7 @@ const Buttons = () => {
     };
 
     const handleAction = async () => {
+        setMultN(primeP * primeQ);
         if (actionType === 'encrypt') {
             await handleEncrypt();
         } else {
@@ -36,6 +37,8 @@ const Buttons = () => {
     };
 
     const handleEncrypt = async () => {
+    
+
         if (!isPrime(primeP)) {
             showAlert("P is not prime number!");
             return;
@@ -56,14 +59,14 @@ const Buttons = () => {
             return;
         }
 
-        setMultN(primeP * primeQ);
+        let temp = primeP * primeQ;
 
-        if (!numberB || numberB >= multN) {
-            showAlert("P should be lower than N");
+        if (!numberB || numberB >= temp) {
+            showAlert("B should be lower than N");
             return;
         }
 
-        const encryptedText = Encrypt(text, numberB, multN);
+        const encryptedText = Encrypt(text, numberB, temp);
         setC(encryptedText);
 
         const lastDotIndex = outRoad.lastIndexOf('.');
@@ -76,6 +79,8 @@ const Buttons = () => {
     }
 
     const handleDecrypt = async () => {
+        
+
         if (!isPrime(primeP)) {
             showAlert("P is not prime number!");
             return;
@@ -96,13 +101,13 @@ const Buttons = () => {
             return;
         }
 
-        setMultN(primeP * primeQ);
-        
-        if (!numberB || numberB >= multN) {
-          showAlert("P should be lower than N");
+        let temp = primeP * primeQ;
+
+        if (!numberB || numberB >= temp) {
+          showAlert("B should be lower than N");
           return;
       }
-        const decryptedText = Decrypt(text, numberB, multN, primeQ, primeP);
+        const decryptedText = Decrypt(text, numberB, temp, primeQ, primeP);
         setC(decryptedText);
 
         const lastDotIndex = outRoad.lastIndexOf('.');

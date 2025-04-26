@@ -3,8 +3,8 @@ import '../css/PrimeP.css';
 import { TextContext } from './TextContext';
 
 const KeyInput = () => {
-    const { setPrimeP } = useContext(TextContext);
-    const [inputValue, setInputValue] = useState(''); 
+    const { setPrimeP, primeP } = useContext(TextContext);
+    const [inputValue, setInputValue] = useState(primeP); 
 
     const handleChange = (event) => {
         const filteredValue = event.target.value.replace(/[^0-9]/g, '');
