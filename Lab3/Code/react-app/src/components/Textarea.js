@@ -8,7 +8,7 @@ const TextArea = () => {
     return (
         <div className="text-area">
             <h1>Input Text</h1>
-            <textarea  value={text.join("")} readOnly/>
+            <textarea  value={text.join(" ")} readOnly/>
         </div>
     );
 };

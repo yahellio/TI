@@ -9,7 +9,6 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-
     "lint": "echo \"No linting configured\"",
     "build": "electron-builder"
   },
@@ -25,11 +24,9 @@
     "directories": {
       "output": "release"
     },
-
     "win": {
       "target": "nsis"
     }
-
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.7.0",
@@ -44,6 +41,7 @@
     "electron-builder": "^25.1.8"
   },
   "dependencies": {
+    "big-integer": "^1.6.52",
     "electron-squirrel-startup": "^1.0.1"
   }
 }

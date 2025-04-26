@@ -1,55 +1,68 @@
+/* global BigInt */
 
-export function Encrypt(bytes, b, n){
+export function Encrypt(bytes, b, n) {
+    const bigB = BigInt(b);
+    const bigN = BigInt(n);
     return bytes.map(byte => {
-        return (byte*(byte + b)) % n;
-    })   
-}   
-
-function modInv(a, mod) {
-    const [gcd, x] = gcd_ext(a, mod);
-    if (gcd !== 1) throw new Error("No inverse exists");
-    return (x % mod + mod) % mod;
+        const bigByte = BigInt(byte);
+        const result = (bigByte * (bigByte + bigB)) % bigN;
+        return Number(result); 
+    });
 }
 
 export function Decrypt(bytes, b, n, q, p) {
-    const inv2 = modInv(2, n);
+    const bigB = BigInt(b);
+    const bigN = BigInt(n);
+    const bigQ = BigInt(q);
+    const bigP = BigInt(p);
+
     return bytes.map(byte => {
-        const d = (b * b + 4 * byte) % n;
-        const s = modPow(d, (p + 1) / 4, p);
-        const r = modPow(d, (q + 1) / 4, q);
-        const [Yp, Yq] = gcd_ext(p, q);
-        
-        const d1 = (Yp * p * r + Yq * q * s) % n;
-        const d2 = (n - d1) % n;
-        const d3 = (Yp * p * r - Yq * q * s) % n;
-        const d4 = (n - d3) % n;
+        const bigByte = BigInt(byte);
 
-        const m1 = ((-b + d1 + n) * inv2) % n;
-        const m2 = ((-b + d2 + n) * inv2) % n;
-        const m3 = ((-b + d3 + n) * inv2) % n;
-        const m4 = ((-b + d4 + n) * inv2) % n;
+        const D = (bigB * bigB + 4n * bigByte) % bigN;
+        const mp = modPow(D, (bigP + 1n) / 4n, bigP);
+        const mq = modPow(D, (bigQ + 1n) / 4n, bigQ);
 
-        const validMs = [m1, m2, m3, m4].filter(m => 
-            Number.isInteger(m) && m >= 0 && m <= 255
-        );
-        if (validMs.length === 0) return null; // или бросить ошибку
-        return validMs[0];
+        const [gcd, yp, yq] = gcd_ext(bigP, bigQ);
+
+        let d = [];
+        d[0] = (yp * bigP * mq + yq * bigQ * mp) % bigN;
+        if (d[0] < 0n) d[0] += bigN;
+        d[1] = (bigN - d[0]) % bigN;
+        d[2] = (yp * bigP * mq - yq * bigQ * mp) % bigN;
+        if (d[2] < 0n) d[2] += bigN;
+        d[3] = (bigN - d[2]) % bigN;
+
+        for (let i = 0; i < 4; i++) {
+            let m = (d[i] - bigB);
+            if (m % 2n !== 0n) {
+                m = (m + bigN);
+            }
+            m = (m / 2n) % bigN;
+            if (m < 0n) m += bigN;
+
+            if (m >= 0n && m <= 255n) {
+                return Number(m); // вернуть обычный number
+            }
+        }
+
+        return null; // если ничего не найдено
     });
 }
 
 function modPow(base, exp, mod) {
-    let result = 1;
+    let result = 1n;
     base = base % mod;
-    while (exp > 0) {
-        if (exp % 2 === 1) result = (result * base) % mod;
+    while (exp > 0n) {
+        if (exp % 2n === 1n) result = (result * base) % mod;
         base = (base * base) % mod;
-        exp = Math.floor(exp / 2);
+        exp = exp / 2n;
     }
     return result;
 }
 
 function gcd_ext(a, b) {
-    if (b === 0) return [a, 1, 0];
+    if (b === 0n) return [a, 1n, 0n];
     const [gcd, x1, y1] = gcd_ext(b, a % b);
-    return [gcd, y1, x1 - Math.floor(a / b) * y1];
+    return [gcd, y1, x1 - (a / b) * y1];
 }

@@ -6,7 +6,7 @@ const FileInput = ({ label,id }) => {
     const [isFile, SetIsFile] = useState("❌❌❌❌❌"); 
     const [fileContent, setFileContent] = useState("");
     const [fileText, setFileText] = useState("");
-    const {text, setText, setText4, setOutRoad, setOutDir} = useContext(TextContext);
+    const {text, setText, actionType, setOutRoad, setOutDir} = useContext(TextContext);
 
     useEffect(() => {
         if (id === "in" && text !== fileContent) {
@@ -23,12 +23,16 @@ const FileInput = ({ label,id }) => {
 
     const mouseClick = async (id) => {
         if(id === "in"){
-            let t = await window.electronAPI.openKeyFile();
-            if(t.length === 0) return;
+            let byte;
+            if(actionType === 'encrypt'){ 
+                byte = 1
+            }else{ 
+                byte = 4}
+            let t = await window.electronAPI.openKeyFile(byte);
+            if (!t || t.length === 0) return; 
             setText(t[0]);
-            setText4(t[1]);
             setFileContent(t[0]);//вроде бесполезная строка но нет времени дебажить без неё
-            setOutRoad(t[2]);
+            setOutRoad(t[1]);
             SetIsFile("✅✅✅✅✅");
             
         }else{     

@@ -16,10 +16,9 @@ const CustomAlert = ({ message, onClose }) => {
 };
 
 const Buttons = () => {
-    const { text, text4, primeP, primeQ, numberB, setMultN, multN, outRoad, outDir, setC } = useContext(TextContext);
-    const [alertMessage, setAlertMessage] = useState(null);
-    const [actionType, setActionType] = useState('encrypt'); // 'encrypt' or 'decrypt'
+    const { text, primeP, primeQ, numberB, setMultN, multN, outRoad, outDir, setC, actionType, setActionType} = useContext(TextContext);
 
+    const [alertMessage, setAlertMessage] = useState(null);
     const showAlert = (message) => {
         setAlertMessage(message);
     };
@@ -73,7 +72,7 @@ const Buttons = () => {
 
         const newFileName = `${fileName}_encrypt${fileExt}`;
 
-        if (outDir && outRoad) await window.electronAPI.writeInFile(outDir + "/" + newFileName, encryptedText);
+        if (outDir && outRoad) await window.electronAPI.writeInFile(outDir + "/" + newFileName, encryptedText, 4);
     }
 
     const handleDecrypt = async () => {
@@ -97,14 +96,13 @@ const Buttons = () => {
             return;
         }
 
-        if (!numberB || numberB >= multN) {
-            showAlert("P should be lower than N");
-            return;
-        }
-
         setMultN(primeP * primeQ);
-
-        const decryptedText = Decrypt(text4, numberB, multN, primeQ, primeP);
+        
+        if (!numberB || numberB >= multN) {
+          showAlert("P should be lower than N");
+          return;
+      }
+        const decryptedText = Decrypt(text, numberB, multN, primeQ, primeP);
         setC(decryptedText);
 
         const lastDotIndex = outRoad.lastIndexOf('.');
@@ -113,7 +111,7 @@ const Buttons = () => {
 
         const newFileName = `${fileName}_decrypt${fileExt}`;
 
-        if (outDir && outRoad) await window.electronAPI.writeInFile(outDir + "/" + newFileName, decryptedText);
+        if (outDir && outRoad) await window.electronAPI.writeInFile(outDir + "/" + newFileName, decryptedText, 1);
     }
 
     return (

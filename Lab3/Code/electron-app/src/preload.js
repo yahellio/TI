@@ -4,8 +4,8 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electronAPI', {
-    openKeyFile: () => ipcRenderer.invoke('open-key-file'),
+    openKeyFile: (byte) => ipcRenderer.invoke('open-key-file', byte),
     getFileName: () => ipcRenderer.invoke('get-file-name'),
-    writeInFile: (path,text) => ipcRenderer.invoke('write-in-name', path, text)
+    writeInFile: (path,text,byte) => ipcRenderer.invoke('write-in-name', path, text, byte)
 });
 
