@@ -16,7 +16,7 @@ const CustomAlert = ({ message, onClose }) => {
 };
 
 const Buttons = () => {
-    const { text, primeP, primeQ, numberB, setMultN, multN, outRoad, outDir, setC, actionType, setActionType} = useContext(TextContext);
+    const { text, primeP, primeQ, numberB, setMultN, outRoad, outDir, setC, actionType, setActionType} = useContext(TextContext);
 
     const [alertMessage, setAlertMessage] = useState(null);
     const showAlert = (message) => {
