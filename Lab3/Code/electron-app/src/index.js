@@ -20,10 +20,10 @@ const createWindow = () => {
   mainWindow.webContents.setZoomFactor(1.25);
 
   //Developement
-  mainWindow.loadURL("http://localhost:3000");
+  //mainWindow.loadURL("http://localhost:3000");
   
   //Production
-  //mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
 
 };
